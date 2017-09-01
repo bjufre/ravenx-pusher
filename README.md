@@ -1,6 +1,6 @@
 # RavenxPusher
 [![Hex pm](http://img.shields.io/hexpm/v/ravenx_pusher.svg?style=flat)](https://hex.pm/packages/ravenx_pusher)
-[![Travis CI](https://img.shields.io/travis/behind-design/ravenx_pusher.svg)](https://travis-ci.org/behind-design/ravenx-pusher)
+[![Travis CI](https://img.shields.io/travis/behind-design/ravenx-pusher.svg)](https://travis-ci.org/behind-design/ravenx-pusher)
 
 RavenxPusher is a custom strategy for [`ravenx`](https://github.com/acutario/ravenx) so we can send notifications
 through pusher in an easy and nice way.
