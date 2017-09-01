@@ -3,6 +3,8 @@ defmodule RavenxPusher do
   RavenxPusher is a Strategy to send notifications through Pusher with Ravenx.
   """
 
+  import Pusher, only: [trigger: 4]
+
   alias RavenxPusher.Push
 
   @behaviour Ravenx.StrategyBehaviour
@@ -49,7 +51,8 @@ defmodule RavenxPusher do
 
   defp send_push(%Push{} = push, %{host: host, port: port, app_id: aid, app_key: akey, secret: secret}) do
     Pusher.configure!(host, port, aid, akey, secret)
-    case Pusher.trigger(push.event, push.data, push.channels, push.socket_id) do
+
+    case trigger(push.event, push.data, push.channels, push.socket_id) do
       :ok    -> {:ok, %{ push | sent?: true }}
       :error -> {:error, {:pusher_error, push}}
     end
