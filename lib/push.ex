@@ -5,7 +5,7 @@ defmodule RavenxPusher.Push do
 
   defstruct data: nil,
             event: nil,
-            channels: [],
+            channels: nil,
             socket_id: nil,
             sent?: false
 

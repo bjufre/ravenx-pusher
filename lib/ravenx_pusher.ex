@@ -59,7 +59,7 @@ defmodule RavenxPusher do
     push
     |> add_to_push(:data, Map.get(payload, :data))
     |> add_to_push(:event, Map.get(payload, :event))
-    |> add_to_push(:channels, Map.get(payload, :channels))
+    |> add_to_push(:channels, get_channels(Map.get(payload, :channels)))
     |> add_to_push(:socket_id, Map.get(payload, :socket_id))
   end
 
@@ -75,4 +75,9 @@ defmodule RavenxPusher do
   defp add_to_push(push, key, value), do: Map.put(push, key, value)
 
   defp add_to_options(opts, key, value), do: Map.put(opts, key, value)
+
+  defp get_channels(nil),                                                        do: nil
+  defp get_channels(channels) when is_list(channels) and length(channels) > 0,   do: channels
+  defp get_channels(channels) when is_binary(channels),                          do: [channels]
+  defp get_channels(_channels),                                                  do: nil
 end

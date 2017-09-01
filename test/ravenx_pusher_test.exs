@@ -87,7 +87,7 @@ defmodule RavenxPusherTest do
 
     assert {:ok, %Push{} = push} = response
     assert push.data === "data"
-    assert push.channels === "my-channel"
+    assert push.channels === ["my-channel"]
     assert push.event === "my-super-event"
     assert push.sent?
     refute push.socket_id
@@ -106,7 +106,7 @@ defmodule RavenxPusherTest do
 
     assert {:ok, %Push{} = push} = response
     assert push.data === "data"
-    assert push.channels === "my-channel"
+    assert push.channels === ["my-channel"]
     assert push.event === "my-super-event"
     assert push.sent?
     refute push.socket_id
