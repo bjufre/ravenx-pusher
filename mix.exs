@@ -30,7 +30,7 @@ defmodule RavenxPusher.Mixfile do
   defp docs do
     [
       source_ref: "v#{@version}",
-      canonical: "http://hexdocs.pm/ravenx-pusher",
+      canonical: "http://hexdocs.pm/ravenx_pusher",
       main: "RavenxPusher",
       source_url: "https://github.com/behind-design/ravenx-pusher",
       extras: ["README.md"]
