@@ -13,7 +13,7 @@ defmodule RavenxPusher.Push do
     data: any,
     event: binary,
     socket_id: binary,
-    channels: list(binary),
+    channels: binary | list(binary),
     sent?: atom
   }
 end
