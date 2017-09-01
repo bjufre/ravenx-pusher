@@ -11,7 +11,7 @@ To install this package, you need to add  `ravenx_pusher` to your list of depend
 
 ```elixir
 def deps do
-  [{:ravenx_pusher, "~> 0.1.0"}]
+  [{:ravenx_pusher, "~> 0.1.1"}]
 end
 ```
 And second you need to add it to the list of `Ravenx` strategies in the config in order for it to work:
