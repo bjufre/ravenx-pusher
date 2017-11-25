@@ -5,6 +5,7 @@ defmodule RavenxPusherTest do
   alias Plug.Conn
 
   alias RavenxPusher.Push
+  alias Ravenx.Strategy.Pusher
 
   @push_required [:data, :event, :channels]
   @required_options [:host, :port, :app_id, :app_key, :secret]
@@ -31,7 +32,7 @@ defmodule RavenxPusherTest do
     Application.put_env(:ravenx, :config, RavenxPusher.TestConfig)
 
     Application.put_env(:ravenx, :strategies, [
-      pusher: RavenxPusher
+      pusher: Ravenx.Strategy.Pusher
     ])
 
     {:ok, bypass: bypass, payload: payload, opts: opts}
@@ -40,7 +41,7 @@ defmodule RavenxPusherTest do
   for field <- @required_options do
     test "`call/2` returns `{:error, {:missing_config, #{field}}` when #{field} is not present.", %{payload: payload, opts: opts} do
       options = Map.delete(opts, unquote(field))
-      response = RavenxPusher.call(payload, options)
+      response = Pusher.call(payload, options)
 
       assert {:error, {:missing_config, unquote(field)}} = response
     end
@@ -49,7 +50,7 @@ defmodule RavenxPusherTest do
   for field <- @push_required do
     test "`call/2` returns `{:error, {:missing_field, #{field}}` when #{field} is not present.", %{payload: payload, opts: opts} do
       payload = Map.delete(payload, unquote(field))
-      response = RavenxPusher.call(payload, opts)
+      response = Pusher.call(payload, opts)
 
       assert {:error, {:missing_field, unquote(field)}} = response
     end
@@ -57,7 +58,7 @@ defmodule RavenxPusherTest do
 
   test "`Ravenx.available_strategies` returns the default strategies plus `RavenxPusher.Strategy`" do
     strategies = Ravenx.available_strategies
-    assert pusher: RavenxPusher in strategies
+    assert pusher: Ravenx.Strategy.Pusher in strategies
   end
 
   test "`Ravenx.dispatch/3` returs `{:error, {:pusher_error, %Push{}}}` when something goes wrong with pusher.", %{bypass: bypass, payload: payload} do
