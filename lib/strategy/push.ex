@@ -10,10 +10,10 @@ defmodule RavenxPusher.Push do
             sent?: false
 
   @type t :: %__MODULE__{
-    data: any,
-    event: binary,
-    socket_id: binary,
-    channels: binary | list(binary),
-    sent?: atom
-  }
+          data: any,
+          event: binary,
+          socket_id: binary,
+          channels: binary | list(binary),
+          sent?: atom
+        }
 end
