@@ -58,10 +58,9 @@ defmodule RavenxPusher.Mixfile do
   defp deps do
     [
       # Must
-      {:ravenx, "~> 1.1.3"},
-      {:pusher, "~> 0.1.3"},
+      {:ravenx, "~> 2.0.0"},
+      {:pusher, "~> 1.0.0"},
       {:plug, "~> 1.0"},
-      {:httpoison, "~> 1.0", override: true},
 
       # Docs
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
