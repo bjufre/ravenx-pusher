@@ -21,4 +21,4 @@ erl_crash.dump
 
 *.tar
 
-.elixir-ls/*
+/.elixir_ls
