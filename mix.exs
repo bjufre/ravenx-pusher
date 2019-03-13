@@ -1,7 +1,7 @@
 defmodule RavenxPusher.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
 
   def project do
     [app: :ravenx_pusher,
@@ -68,6 +68,7 @@ defmodule RavenxPusher.Mixfile do
      {:ravenx, "~> 1.0.0"},
      {:pusher, "~> 0.1.3"},
      {:plug, "~> 1.0"},
+     {:plug_cowboy, "~> 1.0"},
 
      # Docs
      {:ex_doc, "~> 0.16", only: :dev, runtime: false},

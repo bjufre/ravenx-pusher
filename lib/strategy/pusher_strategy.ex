@@ -19,10 +19,10 @@ defmodule Ravenx.Strategy.Pusher do
   any required config fields are missing, or `{:error, {:pusher_error, %Push{}}}`
   in case there was an error when sending the notification.
   """
-  @spec call(Ravenx.notif_payload, Ravenx.notif_options)
-  :: {:ok, Push.t}
-   | {:error, {:missing_config, any}}
-   | {:error, {:pusher_error, Push.t}}
+  @spec call(Ravenx.notif_payload(), Ravenx.notif_options()) ::
+          {:ok, Push.t()}
+          | {:error, {:missing_config, any}}
+          | {:error, {:pusher_error, Push.t()}}
   def call(payload, opts \\ %{}) when is_map(payload) and is_map(opts) do
     options = parse_options(opts)
 
@@ -31,10 +31,10 @@ defmodule Ravenx.Strategy.Pusher do
     |> send_push(options)
   end
 
-  @spec send_push(payload :: map, options :: map)
-  :: {:ok, Push.t}
-  | {:error, {:missing_config, any}}
-  | {:error, {:pusher_error, Push.t}}
+  @spec send_push(payload :: map, options :: map) ::
+          {:ok, Push.t()}
+          | {:error, {:missing_config, any}}
+          | {:error, {:pusher_error, Push.t()}}
   defp send_push(payload, opts)
 
   for field <- @required_options do
@@ -49,11 +49,17 @@ defmodule Ravenx.Strategy.Pusher do
     end
   end
 
-  defp send_push(%Push{} = push, %{host: host, port: port, app_id: aid, app_key: akey, secret: secret}) do
+  defp send_push(%Push{} = push, %{
+         host: host,
+         port: port,
+         app_id: aid,
+         app_key: akey,
+         secret: secret
+       }) do
     configure!(host, port, aid, akey, secret)
 
     case trigger(push.event, push.data, push.channels, push.socket_id) do
-      :ok    -> {:ok, %{ push | sent?: true }}
+      :ok -> {:ok, %{push | sent?: true}}
       :error -> {:error, {:pusher_error, push}}
     end
   end
@@ -79,8 +85,8 @@ defmodule Ravenx.Strategy.Pusher do
 
   defp add_to_options(opts, key, value), do: Map.put(opts, key, value)
 
-  defp get_channels(nil),                                                        do: nil
-  defp get_channels(channels) when is_list(channels) and length(channels) > 0,   do: channels
-  defp get_channels(channels) when is_binary(channels),                          do: [channels]
-  defp get_channels(_channels),                                                  do: nil
+  defp get_channels(nil), do: nil
+  defp get_channels(channels) when is_list(channels) and length(channels) > 0, do: channels
+  defp get_channels(channels) when is_binary(channels), do: [channels]
+  defp get_channels(_channels), do: nil
 end

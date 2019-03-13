@@ -1,0 +1,12 @@
+{application,pusher,
+             [{applications,[kernel,stdlib,elixir,httpoison,exjsx,signaturex]},
+              {description,"  Pusher HTTP client\n"},
+              {modules,['Elixir.Pusher','Elixir.Pusher.HttpClient',
+                        'Elixir.Pusher.RequestSigner']},
+              {registered,[]},
+              {vsn,"0.1.3"},
+              {env,[{host,<<"http://localhost">>},
+                    {port,<<"8080">>},
+                    {app_key,<<"app_key">>},
+                    {app_id,<<"app_id">>},
+                    {secret,<<"secret">>}]}]}.
